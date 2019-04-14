@@ -15,14 +15,6 @@
 #include <DallasTemperature.h>               //Biblioteca Senzor DS18B20
 #include <OneWire.h>                         //Biblioteca OneWire
 
-// --- Definire pinibutoane - LED-uri -------------------------------------
-#define butUp       13                       //Buton UP (SUS)
-#define butDown     10                       //Buton DOWN (JOS)
-#define butLeft     12                       //Buton LEFT (STANGA)
-#define butRight    9                        //Buton RIGHT (DREAPTA)
-#define butset      11                       //Buton SELECT (SET)
-#define butesc      8                        //Buton IESIRE (ESC)
-
 #define ONE_WIRE_BUS A3    // senzorii DS18B20 sunt conectati la pinul A3
 #define precizie 9         // setare precizie 9 biti senzori DS
 
@@ -50,19 +42,18 @@ unsigned long currentMillis ;
 //--- setare meniu principal & Butoane -------------------------------------
 // variabile necesare pentru definire meniu principal si butoane
 char meniu = 1;
-boolean t_butUp, t_butDown, t_butLeft, t_butRight, t_butset, t_butesc;
 
 OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
 DeviceAddress sensors1, sensors2;
 
 //---- Definire pini pentru conectare LCD ----------------------------------
-LiquidCrystal lcd (7,  //RS no digital 7
+LiquidCrystal lcd (7,  //RS no digital 4
                    6,  //EN no digital 6
-                   5,  //D4 no digital 5
-                   4,  //D5 no digital 4
-                   3,  //D6 no digital 3
-                   2); //D7 no digital 2
+                   5,  //D4 no digital 11
+                   4,  //D5 no digital 12
+                   3,  //D6 no digital 13
+                   2); //D7 no digital 14
 
 RTC_DS1307 RTC;    //Tip de DS folosit la RTC - ceas
 
@@ -72,20 +63,6 @@ void setup ()
   lcd.begin(20, 4);    // Initializare tip LCD 20x4
   RTC.begin();
   Wire.begin();
-
-  pinMode(butUp, INPUT_PULLUP);
-  pinMode(butDown, INPUT_PULLUP);
-  pinMode(butLeft, INPUT_PULLUP);
-  pinMode(butRight, INPUT_PULLUP);
-  pinMode(butset, INPUT_PULLUP);
-  pinMode(butesc, INPUT_PULLUP);
-
-  t_butUp   = 0x00;             //Initializare variabile butoane pe 0
-  t_butDown = 0x00;
-  t_butLeft  = 0x00;
-  t_butRight  = 0x00;
-  t_butset  = 0x00;
-  t_butesc  = 0x00;
 
   lcd.createChar(1, termometru);   // creare caracter termomentru pentru afisare pe LCD
 
@@ -113,49 +90,8 @@ void setup ()
 // ---------------------------------------------------------------------------
 void loop()
 {
-  Schimbaremeniu();
   Afisaremeniu();
   if (meniu < 4)meniuauto();
-}
-
-// ---------------------------------------------------------------------------
-void Schimbaremeniu()
-{
-  if (digitalRead(butUp) == 0x00) {
-    t_butUp = 0x01;
-  }
-
-  if (digitalRead(butDown) == 0x00) {
-    t_butDown = 0x01;
-  }
-
-  if (digitalRead(butUp) && t_butUp) {
-    t_butUp = 0x00;
-    lcd.clear();
-    meniu++;
-
-    if (meniu > 3) {
-      meniu = 1;
-    }
-  }
-
-  if (digitalRead(butDown) && t_butDown) {
-    t_butDown = 0x00;
-    lcd.clear();
-    meniu--;
-
-    if (meniu < 1) {
-      meniu = 3;
-    }
-  }
-  if (digitalRead(butesc) == 0x00) {
-    t_butesc = 0x01;
-  }
-  if (digitalRead(butesc) && t_butesc) {
-    t_butesc = 0x00;
-    lcd.clear();
-    meniu = 1;
-  }
 }
 
 // --------------------------------------------------------------------------
