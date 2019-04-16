@@ -12,3 +12,10 @@ Afisarea informatiilor in cele 3 meniuri
 
 
 ![poza](https://2.bp.blogspot.com/-Wk4hzkIgdi8/XLL3Tw3ja4I/AAAAAAAABc4/Cg1HN_XD4W0ZsHGba7Q2NhLQyBgAj7FKQCEwYBhgL/s1600/20190414_092752.jpg)
+
+
+
+Schema electrica a Ceasului
+
+
+![poza](https://1.bp.blogspot.com/-iH0LGziqJvg/XLNwlZTNg2I/AAAAAAAABdc/4OAZvNBNkPIPFwAP1Ad1TDcNAJsiOgkogCLcBGAs/s1600/Schema%2BCeas%2BDS1307%2Bsi%2B2%2BDS18B20.JPG)
